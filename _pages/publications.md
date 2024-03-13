@@ -16,6 +16,7 @@ author_profile: true
 Chen, Y., Wong, L. L. N., Kuehnel, V., Qian, J., Voss, S. C., & **Shangqiguo, W.** (2021). Can dual compression offer better Mandarin speech intelligibility and sound quality than fast-acting compression? *Trends in Hearing*, 25. [https://doi.org/10.1177/2331216521997610](https://doi.org/10.1177/2331216521997610)
 
 Monaghan, J. J. M., Goehring, T., Yang, X., Bolner, F., **Wang, S.**, Wright, M. C. M., & Bleeck, S. (2017). Auditory inspired machine learning techniques can improve speech intelligibility and quality for hearing-impaired listeners. *The Journal of the Acoustical Society of America*, 141(3), 1985–1998. [https://doi.org/10.1121/1.4977197](https://doi.org/10.1121/1.4977197)
+
 <br>
 
 Conference Talks and Invited Talks
