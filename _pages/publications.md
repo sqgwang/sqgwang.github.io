@@ -19,7 +19,7 @@ Monaghan, J. J. M., Goehring, T., Yang, X., Bolner, F., **Wang, S.**, Wright, M.
 
 
 Conference Talks and Invited Talks
-====
+
 **Wang, S.**, Wong, L. L. N. (September 2023). The Integrated Digit-in-Noise Test and Its Potential Applications. *The 2023 International Workshop on Frontiers in Hearing Science and Technology*, Shenzhen, China.
 
 **Wang, S.**, Wong, L. L. N. (June 2023). Distinguishing difficulties In speech understanding due to hearing loss and cognitive decline. *The 4th Virtual Conference on Computational Audiology.*
