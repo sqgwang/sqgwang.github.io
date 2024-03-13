@@ -1,0 +1,22 @@
+---
+title: 'Session 4: Dr. Mengfan Wu: Investigating Speech-in-Noise Outcome in Older Hearing-Aid Users, Using Auditory Profiling from the Danish BEAR project'
+date: 2022-12-15
+permalink: /posts/2022/12/blog-post-2/
+tags:
+  - audiology
+  - hearing science
+---
+
+[Session 4](https://www.bilibili.com/video/BV1VJ4m1Y7i9/?spm_id_from=333.999.0.0)
+
+老年助听器使用者噪声言语识别个体差异研究：从丹麦BEAR（Better hEAring Rehabilitation）项目中机器学习归类的听觉差异出发
+Investigating Speech-in-Noise Outcome in Older Hearing-Aid Users, Using Auditory Profiling from the Danish BEAR project
+
+根据世界卫生组织的数据，65岁及以上的人中有近三分之一患有听力损失。助听器能有效帮助听力损失人群提高听觉和日常沟通能力，有着很大潜在的市场的需求。尽管在过去的几十年里，助听器的技术有了很大的进步，但许多用户对他们的助听器不满意，有些甚至鲜少使用它们。助听器在噪声环境下并不能有效帮助用户识别语音是最普遍反应的问题之一，而个体用于在噪声下语音识别的表现也有非常大的差异。由于助听器通常只根据听力图进行个体验配，因此那些有明显阈上听觉功能损失的助听器使用者可能不能得到最适合的验配，这可能导致不佳的助听器使用效果。
+为了能为助听器使用提供更人性化的验配，丹麦的 Better hEAring Rehabilitation (BEAR) 项目研发了一套更全面听觉测试，对助听器使用者进行更全面的听觉及言语功能的评估，并根据这些测试结果对他们进行分类。这个测试包括了纯音测试（audibility），响度感知（loudness perception），双耳听觉 （binaural hearing），频域时域调制探测能力（spectro-temporal modulation detection），和未助听条件下的言语识别（unaided speech recognition in noise）方面能力测试。根据这个测试在大量听力损失人群中得到的个体数据，使用机器学习算法归纳出四类不同的听觉类型（auditory profile）。
+本次分享的主题是探究已被确认并归类的听觉类型是否能解释助听器用户在噪声中语音识别表现的个体差异，是否能找到对于不同听觉类型的助听器使用者合适的相对个性化的助听器参数。从这个主题延申出三个研究：
+研究一探究了四个听觉类型和六个助听器设置参数在复杂听觉场景中的潜在相互作用。
+研究二通过各种噪声情景和不同品牌助听器是否对各个听觉类型用户的言语识别有不同的影响。
+研究三对比个体的各种听觉能力以及认知能力对于助听器使用者噪声言语识别的影响
+
+------
