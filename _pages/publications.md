@@ -4,7 +4,7 @@ title: "Publications"
 permalink: /publications/
 author_profile: true
 ---
-**Wang, S.**, Wong, L. L. N., & Chen, Y. (2024). Development of the mandarin reading span test and confirmation of its relationship with speech perception in noise. International journal of audiology, 1–10. Advance online publication. https://doi.org/10.1080/14992027.2024.2305685
+**Wang, S.**, Wong, L. L. N., & Chen, Y. (2024). Development of the mandarin reading span test and confirmation of its relationship with speech perception in noise. International journal of audiology, 1–10. Advance online publication. [https://doi.org/10.1080/14992027.2024.2305685](https://doi.org/10.1080/14992027.2024.2305685)
 
 **Wang S**, Mo C, Chen Y, Dai X, Wang H, Shen X (2004). Exploring the Performance of ChatGPT-4 in Taiwan Audiologist Examination: Indicating the Potential of AI Chatbots in Hearing Care (Preprint). JMIR Preprints. 18/12/2023:55595. DOI: 10.2196/preprints.55595 URL: https://preprints.jmir.org/preprint/55595
 
