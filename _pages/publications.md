@@ -11,9 +11,9 @@ author_profile: true
 
 **Wang, S.**, Wong, L. L. N., & Chen, Y. (2024). Development of the mandarin reading span test and confirmation of its relationship with speech perception in noise. *International journal of audiology*, 1–10. Advance online publication. [https://doi.org/10.1080/14992027.2024.2305685](https://doi.org/10.1080/14992027.2024.2305685)
 
-**Wang, S.** (2023). Development and Validation of a Mandarin Digit-In-Noise Test for Screening Hearing and Cognitive Function. (Thesis). *University of Hong Kong*, Pokfulam, Hong Kong SAR. [https://hub.hku.hk/handle/10722/341541](https://hub.hku.hk/handle/10722/341541)
+**Wang, S.**, & Wong, L. L. N. (2024). Development of the Mandarin Digit-in-Noise Test and Examination of the Effect of the Number of Digits Used in the Test. *Ear and hearing*, *45*(3), 572–582. [https://doi.org/10.1097/AUD.0000000000001447](https://doi.org/10.1097/AUD.0000000000001447)
 
-**Wang, S.**, & Wong, L. L. N. (2023). Development of the Mandarin Digit-in-Noise Test and Examination of the Effect of the Number of Digits Used in the Test. *Ear and hearing*, *45*(3), 572–582. [https://doi.org/10.1097/AUD.0000000000001447](https://doi.org/10.1097/AUD.0000000000001447)
+**Wang, S.** (2023). Development and Validation of a Mandarin Digit-In-Noise Test for Screening Hearing and Cognitive Function. (Thesis). *University of Hong Kong*, Pokfulam, Hong Kong SAR. [https://hub.hku.hk/handle/10722/341541](https://hub.hku.hk/handle/10722/341541)
 
 Chen, Y., Wong, L. L. N., Kuehnel, V., Qian, J., Voss, S. C., & **Shangqiguo, W.** (2021). Can dual compression offer better Mandarin speech intelligibility and sound quality than fast-acting compression? *Trends in Hearing*, 25. [https://doi.org/10.1177/2331216521997610](https://doi.org/10.1177/2331216521997610)
 
