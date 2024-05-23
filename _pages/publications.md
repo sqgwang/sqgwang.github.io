@@ -7,7 +7,7 @@ author_profile: true
 
 **Wang, S.**, & Wong, L. L. N. (2024). An exploration of the memory performance in older adult hearing aid users on the integrated Digit-in-Noise Test. *Trends in hearing*. 2024;28. [doi:10.1177/23312165241253653](https://journals.sagepub.com/doi/10.1177/23312165241253653)
 
-**Wang, S.**, Mo, C., Chen, Y., Dai, X., Wang, H., Shen, X. (2024). Exploring the Performance of ChatGPT-4 in Taiwan Audiologist Examination: Indicating the Potential of AI Chatbots in Hearing Care (In Press). *JMIR Medical Education*. 2024;10:e55595 [doi: 10.2196/55595](https://mededu.jmir.org/2024/1/e55595)
+**Wang, S.**, Mo, C., Chen, Y., Dai, X., Wang, H., Shen, X. (2024). Exploring the Performance of ChatGPT-4 in Taiwan Audiologist Examination: Indicating the Potential of AI Chatbots in Hearing Care. *JMIR Medical Education*. 2024;10:e55595 [doi: 10.2196/55595](https://mededu.jmir.org/2024/1/e55595)
 
 **Wang, S.**, Wong, L. L. N., & Chen, Y. (2024). Development of the mandarin reading span test and confirmation of its relationship with speech perception in noise. *International journal of audiology*, 1–10. Advance online publication. [https://doi.org/10.1080/14992027.2024.2305685](https://doi.org/10.1080/14992027.2024.2305685)
 
