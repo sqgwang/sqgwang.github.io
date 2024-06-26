@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Hi, I am a Senior Research Assistant from [Human Communication, Learning, and Development Unit](https://web.edu.hku.hk/unit/human-communication-learning-and-development), the University of Hong Kong. My research interest includes hearing cognitive science, tele-audiology, and speech perception in noise.
+Hi, I am a Post-doctoral Fellow from [Human Communication, Learning, and Development Unit](https://web.edu.hku.hk/unit/human-communication-learning-and-development), the University of Hong Kong. My research interest includes hearing cognitive science, tele-audiology, and speech perception in noise.
 
 My work and research
 ======
