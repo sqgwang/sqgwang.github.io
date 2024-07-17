@@ -5,7 +5,7 @@ permalink: /publications/
 author_profile: true
 ---
 
-**Wang, S.**, Mo, C., Zhao, C., Shen, X., & Chen, Y. (2024). Recommendations for Expanding the Clinical Role of Audiologists in Hospitals in Mainland China: Insights from a Survey-Based Study. *Perspectives of the ASHA Special Interest Groups*. [https://doi.org/10.1044/2024_PERSP-24-00080]（https://doi.org/10.1044/2024_PERSP-24-00080)
+**Wang, S.**, Mo, C., Zhao, C., Shen, X., & Chen, Y. (2024). Recommendations for Expanding the Clinical Role of Audiologists in Hospitals in Mainland China: Insights from a Survey-Based Study. *Perspectives of the ASHA Special Interest Groups*. [https://doi.org/10.1044/2024_PERSP-24-00080](https://doi.org/10.1044/2024_PERSP-24-00080)
 
 **Wang, S.**, & Wong, L. L. N. (2024). An exploration of the memory performance in older adult hearing aid users on the integrated Digit-in-Noise Test. *Trends in hearing*. 2024;28. [doi:10.1177/23312165241253653](https://journals.sagepub.com/doi/10.1177/23312165241253653)
 
