@@ -4,6 +4,9 @@ title: "Publications"
 permalink: /publications/
 author_profile: true
 ---
+*Corresponding author
+
+Wong, L. L. N., **Wang, S.***, Ieong, A. I. C., Man, C. M. Y., & Pan, T. Y. (2024). Evaluating Psychometric Properties of the Cantonese Integrated Digit in Noise Test: Perhaps the 2-digit Sequence Can Also be Used for Hearing Screening. International Journal of Audiology. (In press)
 
 **Wang, S.**, Mo, C., Zhao, C., Shen, X., & Chen, Y. (2024). Recommendations for Expanding the Clinical Role of Audiologists in Hospitals in Mainland China: Insights from a Survey-Based Study. *Perspectives of the ASHA Special Interest Groups*. [https://doi.org/10.1044/2024_PERSP-24-00080](https://doi.org/10.1044/2024_PERSP-24-00080)
 
@@ -25,6 +28,12 @@ Monaghan, J. J. M., Goehring, T., Yang, X., Bolner, F., **Wang, S.**, Wright, M.
 
 Conference Talks and Invited Talks
 =======
+
+**Wang, S.**, Wong, L. L. N., Pan, Y (September 2024). Comparison of indicators in the integrated digit-in-noise test for hearing and cognitive screening. Auditory Science Meeting (ASM) 2024, Cambridge, UK.
+
+**Wang, S.**, Wong, L. L. N., Pan, Y (September 2024). Comparison of indicators in the integrated digit-in-noise test for hearing and cognitive screening. The 36th World Congress of Audiology, Paris, France.
+
+**Wang, S.**, Wong, L. L. N. (May 2024). Integrated Digit-In-Noise Test for Hearing and Cognitive Screening in Older Adults. International Hearing-Aid Research Conference (IHCON 2024), Lake Tahoe, CA, USA.
 
 **Wang, S.**, Wong, L. L. N. (September 2023). The Integrated Digit-in-Noise Test and Its Potential Applications. *The 2023 International Workshop on Frontiers in Hearing Science and Technology*, Shenzhen, China.
 
