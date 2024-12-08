@@ -6,7 +6,7 @@ author_profile: true
 ---
 *Corresponding author
 
-Wong, L. L. N., **Wang, S.,\*** Ieong, A. I. C., Man, C. M. Y., & Pan, T. Y. (2024). Evaluating psychometric properties of the Cantonese integrated Digit-in-Noise Test: perhaps the 2-digit sequence can also be used for hearing screening. *International Journal of Audiology*, 1–6. [https://doi.org/10.1080/14992027.2024.2424877](https://doi.org/10.1080/14992027.2024.2424877)
+Wong, L. L. N., **Wang, S.\*,** Ieong, A. I. C., Man, C. M. Y., & Pan, T. Y. (2024). Evaluating psychometric properties of the Cantonese integrated Digit-in-Noise Test: perhaps the 2-digit sequence can also be used for hearing screening. *International Journal of Audiology*, 1–6. [https://doi.org/10.1080/14992027.2024.2424877](https://doi.org/10.1080/14992027.2024.2424877)
 
 **Wang, S.**, Mo, C., Zhao, C., Shen, X., & Chen, Y. (2024). Recommendations for Expanding the Clinical Role of Audiologists in Hospitals in Mainland China: Insights from a Survey-Based Study. *Perspectives of the ASHA Special Interest Groups*. [https://doi.org/10.1044/2024_PERSP-24-00080](https://doi.org/10.1044/2024_PERSP-24-00080)
 
