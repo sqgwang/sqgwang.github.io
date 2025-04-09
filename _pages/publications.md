@@ -6,6 +6,8 @@ author_profile: true
 ---
 **\*** Corresponding author
 
+**Wang, S.**, & Wong, L. L. N. (2025). Exploring the potential of using the integrated Digit in Noise Test as a measure of speech recognition in older hearing aid users. *American Journal of Audiology*. (In Press)
+
 **Wang, S.**, Wong, L. L. N., & Shen. X. (2025). The Effect of Dialect and Accent on Digit Perception in Noise in Young Listeners with Normal Hearing. *Journal of Speech, Language, and Hearing Research*. (In Press)
 
 **Wang, S.**, Wong, L. L. N., & Pan, T. Y. (2025). Integrated digit in noise test (iDIN) for rapid hearing and cognitive screening: a preliminary exploration. *Age and ageing*, 54(1), afaf009. [https://doi.org/10.1093/ageing/afaf009](https://doi.org/10.1093/ageing/afaf009)
