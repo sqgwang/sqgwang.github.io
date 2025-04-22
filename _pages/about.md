@@ -21,8 +21,8 @@ I received my Ph.D. in Hearing Science from [the University of Hong Kong](https:
 
 
 
-# Hong Kong Auditory Science Meeting 2025
-
+Hong Kong Auditory Science Meeting 2025
+======
 
 Exciting news! The **Hong Kong Auditory Science Meeting (HKASM) 2025** is coming to the University of Hong Kong, bringing together researchers and students to explore the future of auditory science.
 
@@ -45,5 +45,4 @@ Exciting news! The **Hong Kong Auditory Science Meeting (HKASM) 2025** is coming
 
 Don’t miss this opportunity to be part of a dynamic auditory science community. Join us at HKU for an inspiring day of learning and networking!
 
-For more information, visit the [HKASM 2025 website](https://sites.google.com/view/hkasm2025/home) or contact the CHearS Laboratory.
-```
+For more information, visit the [HKASM 2025 website](https://sites.google.com/view/hkasm2025/home)
