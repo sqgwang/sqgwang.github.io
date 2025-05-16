@@ -10,6 +10,8 @@ redirect_from:
 
 Hi, I am a Post-doctoral Fellow from [Human Communication, Learning, and Development Unit](https://web.edu.hku.hk/unit/human-communication-learning-and-development), the University of Hong Kong. My research interest includes hearing cognitive science, tele-audiology, and speech perception in noise.
 
+PhD in Hearing Science with over 10 years of experience in audiology research and clinical practice. Specializes in developing innovative tools for hearing and cognitive screening, including the Mandarin Digit-in-Noise Test. Committed to advancing clinical audiology through interdisciplinary collaboration and technology-driven solutions.
+
 My work and research
 ======
 My current primary focus is on exploring the potential of the integrated digit-in-noise test (iDIN) in evaluating hearing and cognitive function. I hope to find improved testing formats that will allow DIN to have broader applications in both clinical settings and research. Additionally, I am interested in the development of hearing care services through AI chatbots based on large language models and am conducting some explorations in this area. Lastly, as a new generation audiologist in China, I am also committed to promoting the development of audiology and the professionalization of audiologists in China.
