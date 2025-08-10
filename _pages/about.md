@@ -12,7 +12,7 @@ Hi, I am a Post-doctoral Fellow at the [Human Communication, Learning, and Devel
 
 PhD in Hearing Science with over 10 years of experience in audiology research and clinical practice. Specializes in developing innovative tools for hearing and cognitive screening, including the Mandarin Digit-in-Noise Test. Committed to advancing clinical audiology through interdisciplinary collaboration and technology-driven solutions.
 
-Research abd Work
+Research and Work
 ======
 With a PhD in Hearing Science and over a decade of experience in audiology research and clinical practice, I specialize in developing tools for hearing and cognitive screening. My current research explores the potential of the integrated Digit-in-Noise (iDIN) test to assess both hearing and cognitive functions, with the goal of refining testing formats for broader clinical and research applications. I am also investigating AI-driven solutions, including large language model-based chatbots, to enhance hearing care services and to develop multidimensional approaches for evaluating the impact of hearing loss on everyday functioning. As a next-generation audiologist in China, I am dedicated to advancing the professionalization of audiology and improving hearing care accessibility.
 
