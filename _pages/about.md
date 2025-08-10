@@ -8,43 +8,27 @@ redirect_from:
   - /about.html
 ---
 
-Hi, I am a Post-doctoral Fellow from [Human Communication, Learning, and Development Unit](https://web.edu.hku.hk/unit/human-communication-learning-and-development), the University of Hong Kong. My research interest includes hearing cognitive science, tele-audiology, and speech perception in noise.
+Hi, I am a Post-doctoral Fellow at the [Human Communication, Learning, and Development Unit](https://web.edu.hku.hk/unit/human-communication-learning-and-development), the University of Hong Kong. My research focuses on hearing cognitive science, tele-audiology, and speech perception in noise, aiming to advance clinical audiology through innovative technology and interdisciplinary collaboration.
 
 PhD in Hearing Science with over 10 years of experience in audiology research and clinical practice. Specializes in developing innovative tools for hearing and cognitive screening, including the Mandarin Digit-in-Noise Test. Committed to advancing clinical audiology through interdisciplinary collaboration and technology-driven solutions.
 
-My work and research
+Research abd Work
 ======
-My current primary focus is on exploring the potential of the integrated digit-in-noise test (iDIN) in evaluating hearing and cognitive function. I hope to find improved testing formats that will allow DIN to have broader applications in both clinical settings and research. Additionally, I am interested in the development of hearing care services through AI chatbots based on large language models and am conducting some explorations in this area. Lastly, as a new generation audiologist in China, I am also committed to promoting the development of audiology and the professionalization of audiologists in China.
+With a PhD in Hearing Science and over a decade of experience in audiology research and clinical practice, I specialize in developing tools for hearing and cognitive screening. My current research explores the potential of the integrated Digit-in-Noise (iDIN) test to assess both hearing and cognitive functions, with the goal of refining testing formats for broader clinical and research applications. I am also investigating AI-driven solutions, including large language model-based chatbots, to enhance hearing care services and to develop multidimensional approaches for evaluating the impact of hearing loss on everyday functioning. As a next-generation audiologist in China, I am dedicated to advancing the professionalization of audiology and improving hearing care accessibility.
 
-My background and history
+Background
 ======
-
 I received my Ph.D. in Hearing Science from [the University of Hong Kong](https://web.edu.hku.hk/unit/human-communication-learning-and-development), an MSc in Clinical Audiology from [the University of Southampton](https://www.southampton.ac.uk/courses/audiology-with-clinical-placement-masters-msc), and a BSc in Audiology from [Zhejiang Chinese Medical University](https://www.zcmu.edu.cn/english/). During my BSc and MSc studies, I received training as an audiologist and worked as a clinical audiologist in Singapore and Beijing for several years after graduating from my MSc. During my Ph.D. studies, I spent half a year as a visiting student at [the Deep Hearing Lab](https://www.deephearinglab.com/home) in the MRC Cognition and Brain Sciences Unit at the University of Cambridge.
 
-
-
-Hong Kong Auditory Science Meeting 2025
+News 📢
 ======
+- **July 2025** Joined the [Executive Board](https://computationalaudiology.com/about/#ExecutiveBoard) of the **Computational Audiology Network (CAN)**.
 
-Exciting news! The **Hong Kong Auditory Science Meeting (HKASM) 2025** is coming to the University of Hong Kong, bringing together researchers and students to explore the future of auditory science.
+- **June 2025** Participated in The Johns Hopkins Cochlear Center Fellows Program in Aging, Hearing, and Public Health, hosted by Shanghai Ninth People's Hospital at Shanghai Jiao Tong University School of Medicine, Shanghai, China.
 
-- **Date**: Friday, May 30, 2025
-- **Location**: Faculty of Education, The University of Hong Kong
-- **Host**: Clinical Hearing Sciences (CHearS) Laboratory
-- **Supported by**: University Grants Committee and Faculty of Education, HKU
+- **May 2025**  Successfully hosted the **Hong Kong Auditory Science Meeting (HKASM) 2025** at The University of Hong Kong. My heartfelt thanks to all speakers and participants. For more details, visit the [HKASM 2025 website](https://sites.google.com/view/hkasm2025/home).
 
-## What to Expect
 
-- **Collaborate**: Connect with auditory science experts and peers from Hong Kong and nearby regions.
-- **Present**: Share your research in a supportive, open environment.
-- **Discover**: Engage with the latest advancements in hearing and clinical research.
-- **Free Access**: No registration fee required!
 
-## How to Participate
 
-- **Submit an Abstract**: Abstract submission is now open! Showcase your work.
-- **Register**: Registration opens soon—stay tuned for details.
 
-Don’t miss this opportunity to be part of a dynamic auditory science community. Join us at HKU for an inspiring day of learning and networking!
-
-For more information, visit the [HKASM 2025 website](https://sites.google.com/view/hkasm2025/home)
