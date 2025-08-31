@@ -1,9 +1,10 @@
 ---
-layout: single
-title: iDIN
+layout: archive
+title: "iDIN"
 permalink: /idin/
 author_profile: true
 ---
+
 
 # iDIN
 
