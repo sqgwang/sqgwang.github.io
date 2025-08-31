@@ -12,24 +12,37 @@ author_profile: true
     <title>Digits-in-Noise Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* 重置GitHub Pages默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, sans-serif;
             background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 0 !important; /* 覆盖GitHub Pages边距 */
         }
         .container {
-            background: rgba(255, 255, 255, 0.85); /* Increased transparency */
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             border-radius: 20px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
             padding: 24px;
             max-width: 360px;
+            width: 100%; /* 确保在窄屏幕上填充 */
+            margin: 0 auto; /* 居中 */
         }
         .keypad-button {
-            background: rgba(229, 231, 235, 0.9); /* Subtle transparency for buttons */
+            background: rgba(229, 231, 235, 0.9);
             color: #1f2a44;
             border-radius: 50%;
             width: 64px;
@@ -50,21 +63,21 @@ author_profile: true
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
         }
         .action-button {
-            background: rgba(52, 199, 89, 0.95); /* Green with slight transparency */
+            background: rgba(52, 199, 89, 0.95);
             color: white;
         }
         .action-button:hover {
             background: rgba(45, 180, 74, 0.95);
         }
         .clear-button {
-            background: rgba(255, 59, 48, 0.95); /* Red with slight transparency */
+            background: rgba(255, 59, 48, 0.95);
             color: white;
         }
         .clear-button:hover {
             background: rgba(230, 57, 48, 0.95);
         }
         .start-button {
-            background: rgba(99, 102, 241, 0.95); /* Indigo with slight transparency */
+            background: rgba(99, 102, 241, 0.95);
             color: white;
             font-weight: 600;
             transition: background 0.2s ease;
@@ -78,7 +91,7 @@ author_profile: true
             cursor: not-allowed;
         }
         .input-display {
-            background: rgba(249, 250, 251, 0.9); /* Subtle transparency for input */
+            background: rgba(249, 250, 251, 0.9);
             color: #1f2a44;
             border-radius: 12px;
             padding: 16px;
