@@ -12,65 +12,76 @@ author_profile: false
     <title>Digits-in-Noise Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, sans-serif;
-            background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
-            min-height: 100vh;
+        /* 重置样式以覆盖任何默认干扰 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; width: 100%; overflow-x: hidden; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Roboto, sans-serif; 
+            background: linear-gradient(180deg, #f7f9fc 0%, #e3e8f0 100%);
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 0 !important;
         }
         .container {
-            background: rgba(255, 255, 255, 0.85); /* Increased transparency */
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-            padding: 24px;
-            max-width: 360px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            padding: 28px;
+            max-width: 380px;
+            width: 100%;
+            margin: 0 auto;
+            transition: transform 0.2s ease;
+        }
+        .container:hover {
+            transform: translateY(-2px);
         }
         .keypad-button {
-            background: rgba(229, 231, 235, 0.9); /* Subtle transparency for buttons */
-            color: #1f2a44;
+            background: rgba(235, 235, 245, 0.95);
+            color: #1e1e2f;
             border-radius: 50%;
-            width: 64px;
-            height: 64px;
+            width: 68px;
+            height: 68px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 500;
-            transition: background 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease;
         }
         .keypad-button:hover {
-            background: rgba(209, 213, 219, 0.9);
-            transform: scale(1.05);
+            background: rgba(220, 220, 230, 0.95);
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .keypad-button:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3);
         }
         .action-button {
-            background: rgba(52, 199, 89, 0.95); /* Green with slight transparency */
+            background: rgba(0, 200, 100, 0.95); /* Apple green variant */
             color: white;
         }
         .action-button:hover {
-            background: rgba(45, 180, 74, 0.95);
+            background: rgba(0, 180, 90, 0.95);
         }
         .clear-button {
-            background: rgba(255, 59, 48, 0.95); /* Red with slight transparency */
+            background: rgba(255, 69, 58, 0.95); /* Apple red variant */
             color: white;
         }
         .clear-button:hover {
-            background: rgba(230, 57, 48, 0.95);
+            background: rgba(230, 60, 50, 0.95);
         }
         .start-button {
-            background: rgba(99, 102, 241, 0.95); /* Indigo with slight transparency */
+            background: rgba(0, 122, 255, 0.95); /* Apple system blue */
             color: white;
             font-weight: 600;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
         }
         .start-button:hover {
-            background: rgba(79, 70, 229, 0.95);
+            background: rgba(0, 100, 220, 0.95);
         }
         .start-button:disabled {
             background: rgba(209, 213, 219, 0.7);
@@ -78,24 +89,36 @@ author_profile: false
             cursor: not-allowed;
         }
         .input-display {
-            background: rgba(249, 250, 251, 0.9); /* Subtle transparency for input */
-            color: #1f2a44;
-            border-radius: 12px;
-            padding: 16px;
-            font-size: 28px;
+            background: rgba(245, 245, 250, 0.95);
+            color: #1e1e2f;
+            border-radius: 16px;
+            padding: 18px;
+            font-size: 30px;
             font-weight: 500;
             text-align: right;
-            min-height: 56px;
-            border: 1px solid rgba(229, 231, 235, 0.8);
+            min-height: 60px;
+            border: 1px solid rgba(200, 200, 210, 0.8);
+            transition: all 0.2s ease;
+        }
+        .input-display:focus-within {
+            border-color: rgba(0, 122, 255, 0.5);
+            box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.1);
+        }
+        #result, #input {
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div class="container mx-auto">
-        <h1 class="text-xl font-semibold text-gray-900 text-center mb-4">Digits-in-Noise Test</h1>
-        <p class="text-gray-600 text-center text-sm mb-6">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
-        <button id="start" class="start-button py-3 px-6 rounded-full w-full mb-6">Start Test</button>
-        <div id="input" class="input-display mb-6"></div>
+        <h1 class="text-2xl font-bold text-gray-900 text-center mb-4 tracking-tight">Digits-in-Noise Test</h1>
+        <p class="text-gray-600 text-center text-sm mb-6 leading-relaxed">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
+        <button id="start" class="start-button w-full py-3 px-6 rounded-full text-white font-medium mb-6 transition-all duration-200">Start Test</button>
+        <div id="input" class="input-display mb-6 transition-opacity duration-300"></div>
         <div id="keypad" class="grid grid-cols-3 gap-3 max-w-xs mx-auto">
             <button class="keypad-button">1</button>
             <button class="keypad-button">2</button>
@@ -108,9 +131,9 @@ author_profile: false
             <button class="keypad-button">9</button>
             <button id="clear" class="keypad-button clear-button">Clear</button>
             <button class="keypad-button">0</button>
-            <button id="submit" class="keypad-button action-button">Submit</button>
+            <button id="submit" class="keypad-button action-button">OK</button>
         </div>
-        <p id="result" class="text-gray-900 text-center text-base mt-6"></p>
+        <p id="result" class="text-gray-900 text-center text-base mt-6 transition-opacity duration-300"></p>
     </div>
     <script src="din-test.js"></script>
 </body>
