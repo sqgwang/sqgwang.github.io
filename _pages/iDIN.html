@@ -8,26 +8,110 @@ author_profile: true
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Web-Based Digits-in-Noise Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digits-in-Noise Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #keypad { display: grid; grid-template-columns: repeat(3, 1fr); width: 300px; margin: 30px auto; }
-        #keypad button { padding: 20px; font-size: 24px; }
-        #input { font-size: 32px; margin: 30px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, sans-serif;
+            background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.85); /* Increased transparency */
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+            max-width: 360px;
+        }
+        .keypad-button {
+            background: rgba(229, 231, 235, 0.9); /* Subtle transparency for buttons */
+            color: #1f2a44;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: 500;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+        .keypad-button:hover {
+            background: rgba(209, 213, 219, 0.9);
+            transform: scale(1.05);
+        }
+        .keypad-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+        }
+        .action-button {
+            background: rgba(52, 199, 89, 0.95); /* Green with slight transparency */
+            color: white;
+        }
+        .action-button:hover {
+            background: rgba(45, 180, 74, 0.95);
+        }
+        .clear-button {
+            background: rgba(255, 59, 48, 0.95); /* Red with slight transparency */
+            color: white;
+        }
+        .clear-button:hover {
+            background: rgba(230, 57, 48, 0.95);
+        }
+        .start-button {
+            background: rgba(99, 102, 241, 0.95); /* Indigo with slight transparency */
+            color: white;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+        .start-button:hover {
+            background: rgba(79, 70, 229, 0.95);
+        }
+        .start-button:disabled {
+            background: rgba(209, 213, 219, 0.7);
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+        .input-display {
+            background: rgba(249, 250, 251, 0.9); /* Subtle transparency for input */
+            color: #1f2a44;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 28px;
+            font-weight: 500;
+            text-align: right;
+            min-height: 56px;
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
     </style>
 </head>
 <body>
-    <h1>Digits-in-Noise Test</h1>
-    <p>Use headphones. You'll hear 3 digits in noise. Enter what you hear.</p>
-    <button id="start">Start Test</button>
-    <div id="input"></div>
-    <div id="keypad">
-        <button>1</button><button>2</button><button>3</button>
-        <button>4</button><button>5</button><button>6</button>
-        <button>7</button><button>8</button><button>9</button>
-        <button id="clear">Clear</button><button>0</button><button id="submit">Submit</button>
+    <div class="container mx-auto">
+        <h1 class="text-xl font-semibold text-gray-900 text-center mb-4">Digits-in-Noise Test</h1>
+        <p class="text-gray-600 text-center text-sm mb-6">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
+        <button id="start" class="start-button py-3 px-6 rounded-full w-full mb-6">Start Test</button>
+        <div id="input" class="input-display mb-6"></div>
+        <div id="keypad" class="grid grid-cols-3 gap-3 max-w-xs mx-auto">
+            <button class="keypad-button">1</button>
+            <button class="keypad-button">2</button>
+            <button class="keypad-button">3</button>
+            <button class="keypad-button">4</button>
+            <button class="keypad-button">5</button>
+            <button class="keypad-button">6</button>
+            <button class="keypad-button">7</button>
+            <button class="keypad-button">8</button>
+            <button class="keypad-button">9</button>
+            <button id="clear" class="keypad-button clear-button">Clear</button>
+            <button class="keypad-button">0</button>
+            <button id="Ok" class="keypad-button action-button">Ok</button>
+        </div>
+        <p id="result" class="text-gray-900 text-center text-base mt-6"></p>
     </div>
-    <p id="result"></p>
     <script src="din-test.js"></script>
 </body>
 </html>
