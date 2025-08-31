@@ -4,127 +4,33 @@ title: "iDIN"
 permalink: /idin/
 author_profile: false
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digits-in-Noise Test</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* 重置GitHub Pages默认样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, sans-serif;
-            background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 !important; /* 覆盖GitHub Pages边距 */
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-            padding: 24px;
-            max-width: 360px;
-            width: 100%; /* 确保在窄屏幕上填充 */
-            margin: 0 auto; /* 居中 */
-        }
-        .keypad-button {
-            background: rgba(229, 231, 235, 0.9);
-            color: #1f2a44;
-            border-radius: 50%;
-            width: 64px;
-            height: 64px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 22px;
-            font-weight: 500;
-            transition: background 0.2s ease, transform 0.1s ease;
-        }
-        .keypad-button:hover {
-            background: rgba(209, 213, 219, 0.9);
-            transform: scale(1.05);
-        }
-        .keypad-button:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
-        }
-        .action-button {
-            background: rgba(52, 199, 89, 0.95);
-            color: white;
-        }
-        .action-button:hover {
-            background: rgba(45, 180, 74, 0.95);
-        }
-        .clear-button {
-            background: rgba(255, 59, 48, 0.95);
-            color: white;
-        }
-        .clear-button:hover {
-            background: rgba(230, 57, 48, 0.95);
-        }
-        .start-button {
-            background: rgba(99, 102, 241, 0.95);
-            color: white;
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
-        .start-button:hover {
-            background: rgba(79, 70, 229, 0.95);
-        }
-        .start-button:disabled {
-            background: rgba(209, 213, 219, 0.7);
-            color: #6b7280;
-            cursor: not-allowed;
-        }
-        .input-display {
-            background: rgba(249, 250, 251, 0.9);
-            color: #1f2a44;
-            border-radius: 12px;
-            padding: 16px;
-            font-size: 28px;
-            font-weight: 500;
-            text-align: right;
-            min-height: 56px;
-            border: 1px solid rgba(229, 231, 235, 0.8);
-        }
-    </style>
-</head>
-<body>
-    <div class="container mx-auto">
-        <h1 class="text-xl font-semibold text-gray-900 text-center mb-4">Digits-in-Noise Test</h1>
-        <p class="text-gray-600 text-center text-sm mb-6">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
-        <button id="start" class="start-button py-3 px-6 rounded-full w-full mb-6">Start Test</button>
-        <div id="input" class="input-display mb-6"></div>
-        <div id="keypad" class="grid grid-cols-3 gap-3 max-w-xs mx-auto">
-            <button class="keypad-button">1</button>
-            <button class="keypad-button">2</button>
-            <button class="keypad-button">3</button>
-            <button class="keypad-button">4</button>
-            <button class="keypad-button">5</button>
-            <button class="keypad-button">6</button>
-            <button class="keypad-button">7</button>
-            <button class="keypad-button">8</button>
-            <button class="keypad-button">9</button>
-            <button id="clear" class="keypad-button clear-button">Clear</button>
-            <button class="keypad-button">0</button>
-            <button id="Ok" class="keypad-button action-button">Ok</button>
-        </div>
-        <p id="result" class="text-gray-900 text-center text-base mt-6"></p>
+<div class="container mx-auto">
+    <h1 class="text-xl font-semibold text-gray-900 text-center mb-4">Digits-in-Noise Test</h1>
+    <p class="text-gray-600 text-center text-sm mb-6">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
+    <button id="start" class="start-button py-3 px-6 rounded-full w-full mb-6">Start Test</button>
+    <div id="input" class="input-display mb-6"></div>
+    <div id="keypad" class="grid grid-cols-3 gap-3 max-w-xs mx-auto">
+        <button class="keypad-button">1</button>
+        <button class="keypad-button">2</button>
+        <button class="keypad-button">3</button>
+        <button class="keypad-button">4</button>
+        <button class="keypad-button">5</button>
+        <button class="keypad-button">6</button>
+        <button class="keypad-button">7</button>
+        <button class="keypad-button">8</button>
+        <button class="keypad-button">9</button>
+        <button id="clear" class="keypad-button clear-button">Clear</button>
+        <button class="keypad-button">0</button>
+        <button id="Ok" class="keypad-button action-button">Ok</button>
     </div>
-    <script src="din-test.js"></script>
-</body>
-</html>
+    <p id="result" class="text-gray-900 text-center text-base mt-6"></p>
+</div>
+
+<style>
+    /* 嵌入样式，覆盖Jekyll主题 */
+    .container { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-radius: 20px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08); padding: 24px; max-width: 360px; width: 100%; margin: 0 auto; }
+    .start-button { background: rgba(99, 102, 241, 0.95); color: white; font-weight: 600; transition: background 0.2s ease; }
+    /* 其他样式保持一致 */
+</style>
+
+<script src="/din-test.js"></script>
