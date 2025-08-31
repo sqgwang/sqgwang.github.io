@@ -12,16 +12,31 @@ author_profile: false
     <title>Digits-in-Noise Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 重置样式以覆盖任何默认干扰 */
+        /* 加强重置以覆盖Jekyll主题样式 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; width: 100%; overflow-x: hidden; }
+        html, body { 
+            height: 100%; 
+            width: 100%; 
+            overflow-x: hidden; 
+            /* 覆盖Jekyll主题的body样式 */
+            position: relative !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+        }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Roboto, sans-serif; 
             background: linear-gradient(180deg, #f7f9fc 0%, #e3e8f0 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 !important;
+            /* 确保body不被Jekyll容器限制 */
+            min-height: 100vh !important; 
+        }
+        /* 覆盖Jekyll主内容容器 */
+        .page__content {
+            max-width: none !important;
+            width: 100% !important;
+            padding: 0 !important;
         }
         .container {
             background: rgba(255, 255, 255, 0.9);
@@ -29,8 +44,10 @@ author_profile: false
             border-radius: 24px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             padding: 28px;
-            max-width: 380px;
-            width: 100%;
+            /* 增加最小宽度以避免过窄 */
+            min-width: 320px;
+            max-width: 420px; /* 稍微增大以适应内容 */
+            width: 90%; /* 自适应但有限制 */
             margin: 0 auto;
             transition: transform 0.2s ease;
         }
