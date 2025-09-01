@@ -7,7 +7,7 @@ let currentDigits = [];
 let userInput = '';
 
 // Correction values in dB for digits 0-9 (placeholder; replace with actual values)
-const correctionValues = [-10.7, -14.2, -18.5, -12.4, -13.5, -15.1, -15.0, -15.4, -11.6, -12.0]; // e.g., [1.2, -0.5, 0.3, ...]
+const correctionValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // e.g., [1.2, -0.5, 0.3, ...]
 
 // Adaptive parameters
 let currentSNR = 0; // Starting SNR in dB
@@ -15,6 +15,10 @@ let stepSize = 2; // 2 dB change per step
 let numTrials = 24; // Total trials
 let trialCount = 0;
 let snrHistory = []; // Record SNR for each trial
+let fixedNoiseGain = 1.0; // Default noise gain, set during calibration
+
+let calibrationNoiseSource = null;
+let calibrationNoiseGain = null;
 
 async function loadAudio() {
     try {
@@ -158,7 +162,7 @@ function playTriplet(digits) {
     sourceGain.connect(audioContext.destination);
 
     const noiseGain = audioContext.createGain();
-    noiseGain.gain.value = 1.0; // Fixed noise gain
+    noiseGain.gain.value = fixedNoiseGain; // Use calibrated noise gain
     noiseSource.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
@@ -166,6 +170,48 @@ function playTriplet(digits) {
     source.start(startTime);
     noiseSource.start(startTime, 0, fullBuffer.duration);
     source.onended = () => noiseSource.stop();
+}
+
+// Start calibration mode
+function startCalibration() {
+    if (calibrationNoiseSource) calibrationNoiseSource.stop();
+    calibrationNoiseSource = audioContext.createBufferSource();
+    calibrationNoiseSource.buffer = noiseBuffer;
+    calibrationNoiseSource.loop = true;
+
+    calibrationNoiseGain = audioContext.createGain();
+    calibrationNoiseGain.gain.value = parseFloat(document.getElementById('volumeControl').value); // Initial gain from slider
+    calibrationNoiseSource.connect(calibrationNoiseGain);
+    calibrationNoiseGain.connect(audioContext.destination);
+
+    calibrationNoiseSource.start(0);
+    document.getElementById('calibrate').disabled = true;
+    document.getElementById('volumeControl').disabled = false;
+    document.getElementById('confirm').disabled = false;
+
+    // Add real-time volume control
+    document.getElementById('volumeControl').addEventListener('input', function() {
+        if (calibrationNoiseGain) {
+            calibrationNoiseGain.gain.value = parseFloat(this.value);
+        }
+    });
+}
+
+// Confirm calibration and set fixed noise gain
+function confirmCalibration() {
+    fixedNoiseGain = parseFloat(document.getElementById('volumeControl').value);
+    if (calibrationNoiseSource) {
+        calibrationNoiseSource.stop();
+        calibrationNoiseSource = null;
+    }
+    if (calibrationNoiseGain) {
+        calibrationNoiseGain.disconnect();
+        calibrationNoiseGain = null;
+    }
+    document.getElementById('calibrate').disabled = false;
+    document.getElementById('volumeControl').disabled = true;
+    document.getElementById('confirm').disabled = true;
+    document.getElementById('start').disabled = false; // Enable start after calibration
 }
 
 function generateTriplet() {
@@ -179,6 +225,8 @@ function generateTriplet() {
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     loadAudio().then(() => {
+        document.getElementById('calibrate').addEventListener('click', startCalibration);
+        document.getElementById('confirm').addEventListener('click', confirmCalibration);
         document.getElementById('start').addEventListener('click', () => {
             currentDigits = generateTriplet();
             playTriplet(currentDigits);
