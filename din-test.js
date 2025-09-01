@@ -6,7 +6,7 @@ let noiseBuffer = null;
 let currentDigits = [];
 let userInput = '';
 
-// Correction values in dB for digits 0-9 (placeholder; replace with actual values provided later)
+// Correction values in dB for digits 0-9 (placeholder; replace with actual values)
 const correctionValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // e.g., [1.2, -0.5, 0.3, ...]
 
 async function loadAudio() {
@@ -67,18 +67,19 @@ function applyCorrection(buffer, dbCorrection) {
 // Generate silence buffer
 function createSilence(durationMs) {
     const length = (durationMs / 1000) * audioContext.sampleRate;
-    return audioContext.createBuffer(1, length, audioContext.sampleRate);
+    const buffer = audioContext.createBuffer(1, length, audioContext.sampleRate);
+    return buffer;
 }
 
-// Play a triplet with noise and corrections
+// Play a triplet with noise throughout
 function playTriplet(digits) {
     let totalDuration = 0;
     const segments = [];
 
     // Add 500ms silence at start
-    const silence500 = createSilence(500);
-    segments.push(silence500);
-    totalDuration += silence500.length;
+    const silence500Start = createSilence(500);
+    segments.push(silence500Start);
+    totalDuration += silence500Start.length;
 
     digits.forEach((digit, index) => {
         // Apply correction to digit
@@ -107,24 +108,22 @@ function playTriplet(digits) {
         offset += seg.length;
     });
 
-    // Create noise for full duration
+    // Play full sequence with noise throughout
+    const source = audioContext.createBufferSource();
+    source.buffer = fullBuffer;
+    source.connect(audioContext.destination);
+
     const noiseSource = audioContext.createBufferSource();
     noiseSource.buffer = noiseBuffer;
     noiseSource.loop = true; // Loop if noise is shorter
-
-    // Play full sequence with noise
-    const source = audioContext.createBufferSource();
-    source.buffer = fullBuffer;
-    const noiseGain = audioContext.createGain(); // Adjust SNR if needed
-    noiseGain.gain.value = 1; // Placeholder; implement SNR calculation separately
-
-    source.connect(audioContext.destination);
+    const noiseGain = audioContext.createGain();
+    noiseGain.gain.value = 1; // Placeholder; adjust for SNR
     noiseSource.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
     const startTime = audioContext.currentTime;
     source.start(startTime);
-    noiseSource.start(startTime, 0, fullBuffer.duration);
+    noiseSource.start(startTime, 0, fullBuffer.duration / audioContext.sampleRate);
     source.onended = () => noiseSource.stop();
 }
 
