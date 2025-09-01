@@ -7,7 +7,7 @@ let currentDigits = [];
 let userInput = '';
 
 // Correction values in dB for digits 0-9 (placeholder; replace with actual values)
-const correctionValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // e.g., [1.2, -0.5, 0.3, ...]
+const correctionValues = [-10.7, -14.2, -18.5, -12.4, -13.5, -15.1, -15.0, -15.4, -11.6, -12.0]; // e.g., [1.2, -0.5, 0.3, ...]
 
 // Adaptive parameters
 let currentSNR = 0; // Starting SNR in dB
