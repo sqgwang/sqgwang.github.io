@@ -118,7 +118,7 @@ author_profile: false
             border-color: rgba(0, 122, 255, 0.5);
             box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.1);
         }
-        #result, #input {
+        #result, #input, #progress {
             opacity: 0;
             animation: fadeIn 0.3s forwards;
         }
@@ -200,13 +200,14 @@ author_profile: false
 <body>
     <div class="container mx-auto">
         <h1 class="text-2xl font-bold text-gray-900 text-center mb-4 tracking-tight">Digits-in-Noise Test</h1>
-        <p class="text-gray-600 text-center text-sm mb-6 leading-relaxed">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
+        <p class="text-gray-600 text-center text-sm mb-6 leading-relaxed">Please wear your headphones. Then click the orange button to calibrate the noise level. Next, listen to three digits mixed with background noise, and enter what you hear.</p>
         <button id="start" class="start-button w-full py-3 px-6 rounded-full text-white font-medium mb-6 transition-all duration-200" disabled>Start Test</button>
         <div class="calibration-controls">
             <button id="calibrate" class="calibrate-button"><i class="fas fa-sliders-h"></i></button>
             <input type="range" id="volumeControl" min="0" max="2" step="0.01" value="1.0" disabled>
             <button id="confirm" class="confirm-button"><i class="fas fa-check"></i></button>
         </div>
+        <div id="progress" class="text-gray-600 text-center text-sm mb-4"></div>
         <div id="input" class="input-display mb-6 transition-opacity duration-300"></div>
         <div id="keypad" class="grid grid-cols-3 gap-3 max-w-xs mx-auto">
             <button class="keypad-button">1</button>
