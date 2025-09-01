@@ -9,14 +9,16 @@ author_profile: false
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digits-in-Noise Test - GitHub Pages Version</title>
+    <title>Digits-in-Noise Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* 加强重置以覆盖Jekyll主题样式 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { 
             height: 100%; 
             width: 100%; 
             overflow-x: hidden; 
+            /* 覆盖Jekyll主题的body样式 */
             position: relative !important; 
             margin: 0 !important; 
             padding: 0 !important; 
@@ -27,17 +29,25 @@ author_profile: false
             display: flex;
             justify-content: center;
             align-items: center;
+            /* 确保body不被Jekyll容器限制 */
             min-height: 100vh !important; 
         }
+        /* 覆盖Jekyll主内容容器 */
+        .page__content {
+            max-width: none !important;
+            width: 100% !important;
+            padding: 0 !important;
+        }
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(15px);
             border-radius: 24px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             padding: 28px;
+            /* 增加最小宽度以避免过窄 */
             min-width: 320px;
-            max-width: 500px;
-            width: 90%;
+            max-width: 420px; /* 稍微增大以适应内容 */
+            width: 90%; /* 自适应但有限制 */
             margin: 0 auto;
             transition: transform 0.2s ease;
         }
@@ -57,45 +67,35 @@ author_profile: false
             font-weight: 500;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
             transition: all 0.2s ease;
-            cursor: pointer;
-            user-select: none;
         }
         .keypad-button:hover {
             background: rgba(220, 220, 230, 0.95);
-            transform: scale(1.05);
+            transform: scale(1.1);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .keypad-button:active {
-            transform: scale(0.95);
         }
         .keypad-button:focus {
             outline: none;
             box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3);
         }
         .action-button {
-            background: rgba(0, 200, 100, 0.95);
+            background: rgba(0, 200, 100, 0.95); /* Apple green variant */
             color: white;
         }
         .action-button:hover {
             background: rgba(0, 180, 90, 0.95);
         }
         .clear-button {
-            background: rgba(255, 69, 58, 0.95);
+            background: rgba(255, 69, 58, 0.95); /* Apple red variant */
             color: white;
         }
         .clear-button:hover {
             background: rgba(230, 60, 50, 0.95);
         }
         .start-button {
-            background: rgba(0, 122, 255, 0.95);
+            background: rgba(0, 122, 255, 0.95); /* Apple system blue */
             color: white;
             font-weight: 600;
             transition: all 0.2s ease;
-            padding: 12px 24px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
         }
         .start-button:hover {
             background: rgba(0, 100, 220, 0.95);
@@ -112,11 +112,10 @@ author_profile: false
             padding: 18px;
             font-size: 30px;
             font-weight: 500;
-            text-align: center;
+            text-align: right;
             min-height: 60px;
             border: 1px solid rgba(200, 200, 210, 0.8);
             transition: all 0.2s ease;
-            letter-spacing: 8px;
         }
         .input-display:focus-within {
             border-color: rgba(0, 122, 255, 0.5);
@@ -129,102 +128,14 @@ author_profile: false
         @keyframes fadeIn {
             to { opacity: 1; }
         }
-        .info-panel {
-            background: rgba(245, 245, 250, 0.8);
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 15px;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .progress-container {
-            height: 8px;
-            background: rgba(200, 200, 210, 0.5);
-            border-radius: 4px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            background: rgba(0, 122, 255, 0.8);
-            border-radius: 4px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        .instructions {
-            background: rgba(245, 245, 250, 0.8);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .digit-display {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .digit-box {
-            width: 60px;
-            height: 60px;
-            border: 2px solid rgba(0, 122, 255, 0.3);
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 28px;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.7);
-        }
-        .loading-status {
-            background: rgba(245, 245, 250, 0.8);
-            border-radius: 12px;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 14px;
-            text-align: center;
-        }
-        .status-success {
-            color: green;
-        }
-        .status-error {
-            color: red;
-        }
-        .status-loading {
-            color: blue;
-        }
     </style>
 </head>
 <body>
     <div class="container mx-auto">
         <h1 class="text-2xl font-bold text-gray-900 text-center mb-4 tracking-tight">Digits-in-Noise Test</h1>
-        
-        <div class="instructions">
-            <p class="text-gray-600 text-center mb-2">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
-            <p class="text-gray-500 text-center text-sm">The test will adaptively adjust the difficulty based on your responses.</p>
-        </div>
-        
-        <div id="loading-status" class="loading-status">
-            <p>Audio files: <span id="audio-status" class="status-loading">Loading...</span></p>
-            <p>Noise file: <span id="noise-status" class="status-loading">Loading...</span></p>
-        </div>
-        
-        <div class="digit-display">
-            <div class="digit-box">?</div>
-            <div class="digit-box">?</div>
-            <div class="digit-box">?</div>
-        </div>
-        
-        <button id="start" class="start-button w-full py-3 px-6 rounded-xl text-white font-medium mb-4 transition-all duration-200">Start Test</button>
-        
-        <div class="progress-container">
-            <div id="progress" class="progress-bar"></div>
-        </div>
-        
+        <p class="text-gray-600 text-center text-sm mb-6 leading-relaxed">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
+        <button id="start" class="start-button w-full py-3 px-6 rounded-full text-white font-medium mb-6 transition-all duration-200">Start Test</button>
         <div id="input" class="input-display mb-6 transition-opacity duration-300"></div>
-        
         <div id="keypad" class="grid grid-cols-3 gap-3 max-w-xs mx-auto">
             <button class="keypad-button">1</button>
             <button class="keypad-button">2</button>
@@ -235,407 +146,12 @@ author_profile: false
             <button class="keypad-button">7</button>
             <button class="keypad-button">8</button>
             <button class="keypad-button">9</button>
-            <button id="clear" class="keypad-button clear-button">C</button>
+            <button id="clear" class="keypad-button clear-button">Clear</button>
             <button class="keypad-button">0</button>
-            <button id="submit" class="keypad-button action-button">✓</button>
+            <button id="submit" class="keypad-button action-button">OK</button>
         </div>
-        
         <p id="result" class="text-gray-900 text-center text-base mt-6 transition-opacity duration-300"></p>
-        
-        <div class="info-panel mt-4">
-            <div>
-                <p class="text-xs text-gray-600">Current SNR: <span id="current-snr">0.0</span> dB</p>
-                <p class="text-xs text-gray-600">Trial: <span id="trial-count">0</span>/24</p>
-            </div>
-            <div>
-                <p class="text-xs text-gray-600">Correct: <span id="correct-count">0</span></p>
-                <p class="text-xs text-gray-600">Incorrect: <span id="incorrect-count">0</span></p>
-            </div>
-        </div>
     </div>
-
-    <script>
-        // 修复后的JavaScript代码 - GitHub Pages兼容版
-        let audioContext;
-        try {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        } catch (e) {
-            alert('Web Audio API is not supported in this browser. Please try a modern browser.');
-        }
-        
-        // GitHub Pages音频文件路径配置
-        const repoName = window.location.pathname.split('/')[1]; // 获取仓库名
-        const basePath = repoName ? `/${repoName}/audio` : '/audio'; // 动态路径
-        
-        // 音频文件URL - 使用绝对路径
-        const digitUrls = Array.from({ length: 10 }, (_, i) => `${basePath}/${i}.wav`);
-        const noiseUrl = `${basePath}/noise.wav`;
-        
-        console.log('Audio paths:', { digitUrls, noiseUrl });
-        
-        let digitBuffers = new Array(10);
-        let noiseBuffer = null;
-        let currentDigits = [];
-        let userInput = '';
-        let currentSNR = 0;
-        let stepSize = 2;
-        let numTrials = 24;
-        let trialCount = 0;
-        let correctCount = 0;
-        let incorrectCount = 0;
-        let snrHistory = [];
-        let audioLoaded = false;
-
-        // 更新加载状态
-        function updateAudioStatus(type, status, message) {
-            const element = document.getElementById(`${type}-status`);
-            if (element) {
-                element.textContent = message;
-                element.className = `status-${status}`;
-            }
-        }
-
-        // 修正后的归一化函数
-        function normalizeRMS(buffer, targetRMS = 0.1) {
-            const channelData = buffer.getChannelData(0);
-            let sum = 0;
-            for (let i = 0; i < channelData.length; i++) {
-                sum += channelData[i] ** 2;
-            }
-            const rms = Math.sqrt(sum / channelData.length);
-            const gain = targetRMS / rms;
-
-            const newBuffer = audioContext.createBuffer(buffer.numberOfChannels, buffer.length, buffer.sampleRate);
-            for (let ch = 0; ch < buffer.numberOfChannels; ch++) {
-                const data = buffer.getChannelData(ch);
-                const newData = newBuffer.getChannelData(ch);
-                for (let i = 0; i < data.length; i++) {
-                    newData[i] = data[i] * gain;
-                }
-            }
-            return newBuffer;
-        }
-
-        // 加载音频文件
-        async function loadAudioFile(url, type) {
-            try {
-                updateAudioStatus(type, 'loading', 'Loading...');
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const arrayBuffer = await response.arrayBuffer();
-                const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-                
-                updateAudioStatus(type, 'success', 'Loaded ✓');
-                return audioBuffer;
-            } catch (error) {
-                console.error(`Error loading ${type}:`, error);
-                updateAudioStatus(type, 'error', `Error: ${error.message}`);
-                throw error;
-            }
-        }
-
-        // 修正后的加载音频函数
-        async function loadAllAudio() {
-            try {
-                // 加载数字音频
-                const digitPromises = digitUrls.map((url, index) => 
-                    loadAudioFile(url, 'audio')
-                        .then(buffer => normalizeRMS(buffer, 0.1))
-                        .catch(error => {
-                            console.error(`Failed to load digit ${index}:`, error);
-                            throw error;
-                        })
-                );
-                
-                digitBuffers = await Promise.all(digitPromises);
-
-                // 加载噪声音频并归一化
-                noiseBuffer = await loadAudioFile(noiseUrl, 'noise');
-                noiseBuffer = normalizeRMS(noiseBuffer, 1.0);
-                
-                audioLoaded = true;
-                document.getElementById('start').disabled = false;
-                updateAudioStatus('audio', 'success', 'All audio loaded ✓');
-                updateAudioStatus('noise', 'success', 'Noise loaded ✓');
-                
-            } catch (error) {
-                console.error('Error loading audio files:', error);
-                updateAudioStatus('audio', 'error', 'Using simulated audio');
-                updateAudioStatus('noise', 'error', 'Using simulated noise');
-                
-                // 如果加载失败，使用模拟音频
-                createSimulatedAudio();
-                audioLoaded = true;
-                document.getElementById('start').disabled = false;
-            }
-        }
-
-        // 模拟音频生成（如果真实音频加载失败）
-        function createSimulatedAudio() {
-            // 生成数字音频（简单的正弦波）
-            digitBuffers = Array.from({ length: 10 }, (_, digit) => {
-                const duration = 0.5; // 500ms
-                const sampleRate = audioContext.sampleRate;
-                const frameCount = sampleRate * duration;
-                const buffer = audioContext.createBuffer(1, frameCount, sampleRate);
-                const data = buffer.getChannelData(0);
-                
-                // 每个数字使用不同频率
-                const freq = 300 + digit * 50;
-                for (let i = 0; i < frameCount; i++) {
-                    data[i] = 0.2 * Math.sin(2 * Math.PI * freq * i / sampleRate);
-                }
-                return buffer;
-            });
-            
-            // 生成噪声
-            const noiseDuration = 5.0; // 5秒噪声
-            const noiseSampleRate = audioContext.sampleRate;
-            const noiseFrameCount = noiseSampleRate * noiseDuration;
-            noiseBuffer = audioContext.createBuffer(1, noiseFrameCount, noiseSampleRate);
-            const noiseData = noiseBuffer.getChannelData(0);
-            
-            for (let i = 0; i < noiseFrameCount; i++) {
-                noiseData[i] = Math.random() * 2 - 1; // 白噪声
-            }
-            noiseBuffer = normalizeRMS(noiseBuffer, 1.0);
-        }
-
-        // 应用校正值
-        function applyCorrection(buffer, dbCorrection) {
-            const gain = Math.pow(10, dbCorrection / 20);
-            const newBuffer = audioContext.createBuffer(buffer.numberOfChannels, buffer.length, buffer.sampleRate);
-            for (let ch = 0; ch < buffer.numberOfChannels; ch++) {
-                const data = buffer.getChannelData(ch);
-                const newData = newBuffer.getChannelData(ch);
-                for (let i = 0; i < data.length; i++) {
-                    newData[i] = data[i] * gain;
-                }
-            }
-            return newBuffer;
-        }
-
-        // 生成静音
-        function createSilence(durationMs) {
-            const length = (durationMs / 1000) * audioContext.sampleRate;
-            return audioContext.createBuffer(1, length, audioContext.sampleRate);
-        }
-
-        // 修正后的数字功率计算
-        function calculateDigitPower(digits) {
-            let totalPower = 0;
-            let totalLength = 0;
-
-            digits.forEach(digit => {
-                const correctedBuffer = applyCorrection(digitBuffers[digit], 0);
-                const channelData = correctedBuffer.getChannelData(0);
-                let sum = 0;
-                for (let i = 0; i < channelData.length; i++) {
-                    sum += channelData[i] ** 2;
-                }
-                totalPower += sum;
-                totalLength += channelData.length;
-            });
-
-            return totalPower / totalLength;
-        }
-
-        // 修正后的播放函数
-        function playTriplet(digits) {
-            if (!audioLoaded) {
-                alert('Audio not loaded yet. Please wait.');
-                return;
-            }
-
-            // 更新SNR显示
-            document.getElementById('current-snr').textContent = currentSNR.toFixed(1);
-            document.getElementById('trial-count').textContent = `${trialCount}/${numTrials}`;
-            
-            // 更新进度条
-            document.getElementById('progress').style.width = `${(trialCount / numTrials) * 100}%`;
-            
-            let totalDuration = 0;
-            const segments = [];
-
-            // 开始500ms静音
-            const silence500 = createSilence(500);
-            segments.push(silence500);
-            totalDuration += silence500.length;
-
-            // 添加数字和间隔
-            digits.forEach((digit, index) => {
-                const correctedBuffer = applyCorrection(digitBuffers[digit], 0);
-                segments.push(correctedBuffer);
-                totalDuration += correctedBuffer.length;
-
-                // 数字间200ms静音（最后一个数字后不加）
-                if (index < digits.length - 1) {
-                    const silence200 = createSilence(200);
-                    segments.push(silence200);
-                    totalDuration += silence200.length;
-                }
-            });
-
-            // 结束500ms静音
-            const silence500End = createSilence(500);
-            segments.push(silence500End);
-            totalDuration += silence500End.length;
-
-            // 创建完整信号缓冲区
-            const fullBuffer = audioContext.createBuffer(1, totalDuration, audioContext.sampleRate);
-            let offset = 0;
-            segments.forEach(seg => {
-                fullBuffer.copyToChannel(seg.getChannelData(0), 0, offset);
-                offset += seg.length;
-            });
-
-            // 创建噪声源
-            const noiseSource = audioContext.createBufferSource();
-            noiseSource.buffer = noiseBuffer;
-            noiseSource.loop = true;
-
-            // 计算数字功率
-            const digitPower = calculateDigitPower(digits);
-            
-            // 计算数字增益以实现目标SNR
-            const snrLinear = Math.pow(10, currentSNR / 10);
-            const digitGainValue = Math.sqrt(snrLinear / digitPower);
-
-            // 创建数字信号源
-            const source = audioContext.createBufferSource();
-            source.buffer = fullBuffer;
-            
-            // 创建增益节点
-            const sourceGain = audioContext.createGain();
-            sourceGain.gain.value = digitGainValue;
-            
-            const noiseGain = audioContext.createGain();
-            noiseGain.gain.value = 1.0;
-
-            // 连接节点
-            source.connect(sourceGain);
-            sourceGain.connect(audioContext.destination);
-            
-            noiseSource.connect(noiseGain);
-            noiseGain.connect(audioContext.destination);
-
-            // 播放
-            const startTime = audioContext.currentTime;
-            source.start(startTime);
-            noiseSource.start(startTime, 0, fullBuffer.duration);
-            source.onended = () => {
-                noiseSource.stop();
-            };
-        }
-
-        // 生成三位不同数字
-        function generateTriplet() {
-            const digits = new Set();
-            while (digits.size < 3) {
-                digits.add(Math.floor(Math.random() * 10));
-            }
-            return Array.from(digits);
-        }
-
-        // 计算和显示SRT
-        function calculateSRT() {
-            if (snrHistory.length >= 20) {
-                const last20 = snrHistory.slice(-20);
-                const srt = last20.reduce((sum, val) => sum + val, 0) / 20;
-                document.getElementById('result').textContent = `Test complete. SRT: ${srt.toFixed(2)} dB`;
-            } else {
-                document.getElementById('result').textContent = 'Not enough trials for SRT.';
-            }
-            document.getElementById('start').disabled = false;
-        }
-
-        // 事件监听
-        document.addEventListener('DOMContentLoaded', () => {
-            // 初始禁用开始按钮
-            document.getElementById('start').disabled = true;
-            
-            // 预加载所有音频
-            loadAllAudio();
-
-            document.getElementById('start').addEventListener('click', () => {
-                if (!audioContext) {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume();
-                }
-                
-                currentDigits = generateTriplet();
-                playTriplet(currentDigits);
-                userInput = '';
-                document.getElementById('input').textContent = '';
-                document.getElementById('result').textContent = '';
-                document.getElementById('start').disabled = true;
-                trialCount = 0;
-                correctCount = 0;
-                incorrectCount = 0;
-                snrHistory = [];
-                
-                document.getElementById('correct-count').textContent = '0';
-                document.getElementById('incorrect-count').textContent = '0';
-            });
-
-            document.querySelectorAll('.keypad-button:not(#clear):not(#submit)').forEach(button => {
-                button.addEventListener('click', () => {
-                    if (userInput.length < 3) {
-                        userInput += button.textContent;
-                        document.getElementById('input').textContent = userInput;
-                    }
-                });
-            });
-
-            document.getElementById('clear').addEventListener('click', () => {
-                userInput = '';
-                document.getElementById('input').textContent = '';
-            });
-
-            document.getElementById('submit').addEventListener('click', () => {
-                if (userInput.length === 3) {
-                    const inputDigits = userInput.split('').map(Number);
-                    const correct = inputDigits.every((d, i) => d === currentDigits[i]);
-                    
-                    snrHistory.push(currentSNR);
-                    
-                    if (correct) {
-                        correctCount++;
-                        currentSNR -= stepSize;
-                    } else {
-                        incorrectCount++;
-                        currentSNR += stepSize;
-                    }
-                    
-                    document.getElementById('correct-count').textContent = correctCount;
-                    document.getElementById('incorrect-count').textContent = incorrectCount;
-                    
-                    trialCount++;
-                    
-                    document.getElementById('result').textContent = correct ? 'Correct!' : 'Incorrect.';
-                    document.getElementById('result').style.color = correct ? 'green' : 'red';
-                    
-                    if (trialCount >= numTrials) {
-                        calculateSRT();
-                    } else {
-                        setTimeout(() => {
-                            currentDigits = generateTriplet();
-                            playTriplet(currentDigits);
-                            userInput = '';
-                            document.getElementById('input').textContent = '';
-                            document.getElementById('result').textContent = '';
-                        }, 1000);
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="/din-test.js"></script>
 </body>
 </html>
