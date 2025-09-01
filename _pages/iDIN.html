@@ -134,7 +134,7 @@ author_profile: false
             align-items: center;
         }
         .calibrate-button {
-            background: rgba(255, 149, 0, 0.95); /* Apple orange for calibration */
+            background: rgba(255, 149, 0, 0.95);
             color: white;
             border-radius: 50%;
             width: 48px;
@@ -155,7 +155,7 @@ author_profile: false
             cursor: not-allowed;
         }
         .confirm-button {
-            background: rgba(52, 199, 89, 0.95); /* Apple green for confirm */
+            background: rgba(52, 199, 89, 0.95);
             color: white;
             border-radius: 50%;
             width: 48px;
@@ -184,12 +184,23 @@ author_profile: false
             outline: none;
             box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3);
         }
+        /* 隐藏Jekyll页脚 */
+        footer {
+            display: none !important;
+        }
+        .footer {
+            display: none !important;
+        }
+        /* 确保内容不被页脚推高 */
+        .container {
+            margin-bottom: 0 !important;
+        }
     </style>
 </head>
 <body>
     <div class="container mx-auto">
         <h1 class="text-2xl font-bold text-gray-900 text-center mb-4 tracking-tight">Digits-in-Noise Test</h1>
-        <p class="text-gray-600 text-center text-sm mb-6 leading-relaxed">Please click the orange button to calibrate the noise level first. Listen to the three-digit number mixed with background noise, then enter what you hear.</p>
+        <p class="text-gray-600 text-center text-sm mb-6 leading-relaxed">Use headphones. Listen to three digits mixed with background noise, then enter what you hear.</p>
         <button id="start" class="start-button w-full py-3 px-6 rounded-full text-white font-medium mb-6 transition-all duration-200" disabled>Start Test</button>
         <div class="calibration-controls">
             <button id="calibrate" class="calibrate-button"><i class="fas fa-sliders-h"></i></button>
@@ -216,4 +227,3 @@ author_profile: false
     <script src="/din-test.js"></script>
 </body>
 </html>
-
