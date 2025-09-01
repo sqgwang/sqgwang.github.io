@@ -4,16 +4,23 @@ const noiseUrl = '/audio/noise.wav';
 let digitBuffers = new Array(10);
 let noiseBuffer = null;
 let currentDigits = [];
+let userInput = '';
+
+// Correction values in dB for digits 0-9 (placeholder; replace with actual values provided later)
+const correctionValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // e.g., [1.2, -0.5, 0.3, ...]
 
 async function loadAudio() {
     try {
-        // 加载数字音频
+        // Load digit audio
         const digitPromises = digitUrls.map(url => fetch(url)
             .then(response => response.arrayBuffer())
             .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer)));
         digitBuffers = await Promise.all(digitPromises);
 
-        // 加载噪声音频
+        // Normalize RMS for all digits to consistent level
+        digitBuffers = digitBuffers.map(buffer => normalizeRMS(buffer));
+
+        // Load noise audio
         const noiseResponse = await fetch(noiseUrl);
         const noiseArrayBuffer = await noiseResponse.arrayBuffer();
         noiseBuffer = await audioContext.decodeAudioData(noiseArrayBuffer);
@@ -22,77 +29,146 @@ async function loadAudio() {
     }
 }
 
-function playAudio(digits) {
-    const offlineContext = new OfflineAudioContext(2, 44100 * 3, 44100); // 3秒音频
-    const gainNode = offlineContext.createGain();
-    gainNode.connect(offlineContext.destination);
-    gainNode.gain.value = 0.7; // 调整总体音量
+// Normalize RMS of a buffer to a target level (e.g., -20 dBFS)
+function normalizeRMS(buffer, targetRMS = 0.1) {
+    const channelData = buffer.getChannelData(0); // Assuming mono
+    let sum = 0;
+    for (let i = 0; i < channelData.length; i++) {
+        sum += channelData[i] ** 2;
+    }
+    const rms = Math.sqrt(sum / channelData.length);
+    const gain = targetRMS / rms;
 
-    // 播放三个数字
+    const newBuffer = audioContext.createBuffer(buffer.numberOfChannels, buffer.length, buffer.sampleRate);
+    for (let ch = 0; ch < buffer.numberOfChannels; ch++) {
+        const data = buffer.getChannelData(ch);
+        const newData = newBuffer.getChannelData(ch);
+        for (let i = 0; i < data.length; i++) {
+            newData[i] = data[i] * gain;
+        }
+    }
+    return newBuffer;
+}
+
+// Apply correction value to a digit buffer (in dB)
+function applyCorrection(buffer, dbCorrection) {
+    const gain = Math.pow(10, dbCorrection / 20);
+    const newBuffer = audioContext.createBuffer(buffer.numberOfChannels, buffer.length, buffer.sampleRate);
+    for (let ch = 0; ch < buffer.numberOfChannels; ch++) {
+        const data = buffer.getChannelData(ch);
+        const newData = newBuffer.getChannelData(ch);
+        for (let i = 0; i < data.length; i++) {
+            newData[i] = data[i] * gain;
+        }
+    }
+    return newBuffer;
+}
+
+// Generate silence buffer
+function createSilence(durationMs) {
+    const length = (durationMs / 1000) * audioContext.sampleRate;
+    return audioContext.createBuffer(1, length, audioContext.sampleRate);
+}
+
+// Play a triplet with noise and corrections
+function playTriplet(digits) {
+    let totalDuration = 0;
+    const segments = [];
+
+    // Add 500ms silence at start
+    const silence500 = createSilence(500);
+    segments.push(silence500);
+    totalDuration += silence500.length;
+
     digits.forEach((digit, index) => {
-        const source = offlineContext.createBufferSource();
-        source.buffer = digitBuffers[digit];
-        source.connect(gainNode);
-        source.start(index * 0.8); // 每个数字间隔0.8秒
+        // Apply correction to digit
+        const correctedBuffer = applyCorrection(digitBuffers[digit], correctionValues[digit]);
+        segments.push(correctedBuffer);
+        totalDuration += correctedBuffer.length;
+
+        // Add 200ms silence between digits (except after last)
+        if (index < digits.length - 1) {
+            const silence200 = createSilence(200);
+            segments.push(silence200);
+            totalDuration += silence200.length;
+        }
     });
 
-    // 叠加噪声
-    const noiseSource = offlineContext.createBufferSource();
+    // Add 500ms silence at end
+    const silence500End = createSilence(500);
+    segments.push(silence500End);
+    totalDuration += silence500End.length;
+
+    // Concatenate segments into one buffer
+    const fullBuffer = audioContext.createBuffer(1, totalDuration, audioContext.sampleRate);
+    let offset = 0;
+    segments.forEach(seg => {
+        fullBuffer.copyToChannel(seg.getChannelData(0), 0, offset);
+        offset += seg.length;
+    });
+
+    // Create noise for full duration
+    const noiseSource = audioContext.createBufferSource();
     noiseSource.buffer = noiseBuffer;
-    noiseSource.connect(gainNode);
-    noiseSource.start(0);
-    noiseSource.stop(3); // 噪声持续3秒
+    noiseSource.loop = true; // Loop if noise is shorter
 
-    offlineContext.startRendering().then(renderedBuffer => {
-        const playbackContext = new AudioContext();
-        const playbackSource = playbackContext.createBufferSource();
-        playbackSource.buffer = renderedBuffer;
-        playbackSource.connect(playbackContext.destination);
-        playbackSource.start();
-    });
+    // Play full sequence with noise
+    const source = audioContext.createBufferSource();
+    source.buffer = fullBuffer;
+    const noiseGain = audioContext.createGain(); // Adjust SNR if needed
+    noiseGain.gain.value = 1; // Placeholder; implement SNR calculation separately
+
+    source.connect(audioContext.destination);
+    noiseSource.connect(noiseGain);
+    noiseGain.connect(audioContext.destination);
+
+    const startTime = audioContext.currentTime;
+    source.start(startTime);
+    noiseSource.start(startTime, 0, fullBuffer.duration);
+    source.onended = () => noiseSource.stop();
 }
 
-function startTest() {
-    currentDigits = [];
-    for (let i = 0; i < 3; i++) {
-        currentDigits.push(Math.floor(Math.random() * 10));
+function generateTriplet() {
+    const digits = new Set();
+    while (digits.size < 3) {
+        digits.add(Math.floor(Math.random() * 10));
     }
-    playAudio(currentDigits);
-    document.getElementById('input').textContent = '';
-    document.getElementById('result').textContent = '';
-    document.getElementById('start').disabled = true;
+    return Array.from(digits);
 }
 
-function updateInput(value) {
-    let input = document.getElementById('input').textContent;
-    if (input.length < 3) {
-        document.getElementById('input').textContent += value;
-    }
-}
-
-function clearInput() {
-    document.getElementById('input').textContent = '';
-}
-
-function submitInput() {
-    const userInput = document.getElementById('input').textContent.split('').map(Number);
-    if (userInput.length === 3) {
-        const correct = userInput.every((digit, index) => digit === currentDigits[index]);
-        document.getElementById('result').textContent = correct ? 'Correct!' : 'Incorrect. Try again.';
-        document.getElementById('start').disabled = false;
-    } else {
-        document.getElementById('result').textContent = 'Please enter 3 digits.';
-    }
-}
-
-// 事件监听
+// Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     loadAudio().then(() => {
-        document.getElementById('start').addEventListener('click', startTest);
-        document.querySelectorAll('.keypad-button:not(#clear):not(#submit)').forEach(button => {
-            button.addEventListener('click', () => updateInput(button.textContent));
+        document.getElementById('start').addEventListener('click', () => {
+            currentDigits = generateTriplet();
+            playTriplet(currentDigits);
+            userInput = '';
+            document.getElementById('input').textContent = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('start').disabled = true;
         });
-        document.getElementById('clear').addEventListener('click', clearInput);
-        document.getElementById('submit').addEventListener('click', submitInput);
+
+        document.querySelectorAll('.keypad-button:not(#clear):not(#submit)').forEach(button => {
+            button.addEventListener('click', () => {
+                if (userInput.length < 3) {
+                    userInput += button.textContent;
+                    document.getElementById('input').textContent = userInput;
+                }
+            });
+        });
+
+        document.getElementById('clear').addEventListener('click', () => {
+            userInput = '';
+            document.getElementById('input').textContent = '';
+        });
+
+        document.getElementById('submit').addEventListener('click', () => {
+            if (userInput.length === 3) {
+                const inputDigits = userInput.split('').map(Number);
+                const correct = inputDigits.every((d, i) => d === currentDigits[i]);
+                document.getElementById('result').textContent = correct ? 'Correct!' : 'Incorrect. Try again.';
+                document.getElementById('start').disabled = false;
+            }
+        });
     });
 });
