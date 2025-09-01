@@ -9,6 +9,13 @@ let userInput = '';
 // Correction values in dB for digits 0-9 (placeholder; replace with actual values)
 const correctionValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // e.g., [1.2, -0.5, 0.3, ...]
 
+// Adaptive parameters
+let currentSNR = 0; // Starting SNR in dB, adjustable
+let stepSize = 2; // dB change per step
+let numTrials = 24; // Total trials
+let trialCount = 0;
+let snrHistory = []; // Record SNR for each trial
+
 async function loadAudio() {
     try {
         // Load digit audio
@@ -29,7 +36,7 @@ async function loadAudio() {
     }
 }
 
-// Normalize RMS of a buffer to a target level (e.g., -20 dBFS)
+// Normalize RMS of a buffer to a target level (e.g., -20 dBFS equivalent)
 function normalizeRMS(buffer, targetRMS = 0.1) {
     const channelData = buffer.getChannelData(0); // Assuming mono
     let sum = 0;
@@ -71,8 +78,8 @@ function createSilence(durationMs) {
     return buffer;
 }
 
-// Play a triplet with noise throughout
-function playTriplet(digits) {
+// Play a triplet with noise throughout, at given SNR
+function playTriplet(digits, snr) {
     let totalDuration = 0;
     const segments = [];
 
@@ -100,31 +107,35 @@ function playTriplet(digits) {
     segments.push(silence500End);
     totalDuration += silence500End.length;
 
-    // Concatenate segments into one buffer
-    const fullBuffer = audioContext.createBuffer(1, totalDuration, audioContext.sampleRate);
+    // Concatenate segments into one buffer for speech
+    const speechBuffer = audioContext.createBuffer(1, totalDuration, audioContext.sampleRate);
     let offset = 0;
     segments.forEach(seg => {
-        fullBuffer.copyToChannel(seg.getChannelData(0), 0, offset);
+        speechBuffer.copyToChannel(seg.getChannelData(0), 0, offset);
         offset += seg.length;
     });
 
-    // Play full sequence with noise throughout
-    const source = audioContext.createBufferSource();
-    source.buffer = fullBuffer;
-    source.connect(audioContext.destination);
+    // Play speech with SNR adjustment
+    const speechSource = audioContext.createBufferSource();
+    speechSource.buffer = speechBuffer;
+    const speechGain = audioContext.createGain();
+    speechGain.gain.value = Math.pow(10, snr / 20); // Apply SNR
+    speechSource.connect(speechGain);
+    speechGain.connect(audioContext.destination);
 
+    // Play noise throughout
     const noiseSource = audioContext.createBufferSource();
     noiseSource.buffer = noiseBuffer;
     noiseSource.loop = true; // Loop if noise is shorter
     const noiseGain = audioContext.createGain();
-    noiseGain.gain.value = 1; // Placeholder; adjust for SNR
+    noiseGain.gain.value = 1; // Noise at reference level
     noiseSource.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
     const startTime = audioContext.currentTime;
-    source.start(startTime);
-    noiseSource.start(startTime, 0, fullBuffer.duration / audioContext.sampleRate);
-    source.onended = () => noiseSource.stop();
+    speechSource.start(startTime);
+    noiseSource.start(startTime, 0, speechBuffer.duration / audioContext.sampleRate);
+    speechSource.onended = () => noiseSource.stop();
 }
 
 function generateTriplet() {
@@ -135,16 +146,35 @@ function generateTriplet() {
     return Array.from(digits);
 }
 
+function startNextTrial() {
+    currentDigits = generateTriplet();
+    playTriplet(currentDigits, currentSNR);
+    userInput = '';
+    document.getElementById('input').textContent = '';
+    document.getElementById('result').textContent = '';
+}
+
+// Calculate and display SRT
+function calculateSRT() {
+    if (snrHistory.length >= 20) {
+        const last20 = snrHistory.slice(-20);
+        const srt = last20.reduce((sum, val) => sum + val, 0) / 20;
+        document.getElementById('result').textContent = `Test complete. SRT: ${srt.toFixed(2)} dB`;
+    } else {
+        document.getElementById('result').textContent = 'Not enough trials for SRT.';
+    }
+    document.getElementById('start').disabled = false; // Allow restart
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     loadAudio().then(() => {
         document.getElementById('start').addEventListener('click', () => {
-            currentDigits = generateTriplet();
-            playTriplet(currentDigits);
-            userInput = '';
-            document.getElementById('input').textContent = '';
-            document.getElementById('result').textContent = '';
+            currentSNR = 0; // Reset or adjustable
+            trialCount = 0;
+            snrHistory = [];
             document.getElementById('start').disabled = true;
+            startNextTrial();
         });
 
         document.querySelectorAll('.keypad-button:not(#clear):not(#submit)').forEach(button => {
@@ -165,8 +195,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (userInput.length === 3) {
                 const inputDigits = userInput.split('').map(Number);
                 const correct = inputDigits.every((d, i) => d === currentDigits[i]);
-                document.getElementById('result').textContent = correct ? 'Correct!' : 'Incorrect. Try again.';
-                document.getElementById('start').disabled = false;
+                snrHistory.push(currentSNR);
+                if (correct) {
+                    currentSNR -= stepSize; // One down: make harder
+                } else {
+                    currentSNR += stepSize; // One up: make easier
+                }
+                trialCount++;
+                document.getElementById('result').textContent = correct ? 'Correct!' : 'Incorrect.';
+                if (trialCount >= numTrials) {
+                    calculateSRT();
+                } else {
+                    setTimeout(startNextTrial, 1000); // Delay for next trial
+                }
             }
         });
     });
