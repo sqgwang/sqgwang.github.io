@@ -16,6 +16,8 @@ let numTrials = 24; // Total trials
 let trialCount = 0;
 let snrHistory = []; // Record SNR for each trial
 let fixedNoiseGain = 1.0; // Default noise gain, set during calibration
+let responseTimes = []; // Record response times
+let correctResponseTimes = []; // Record correct response times
 
 let calibrationNoiseSource = null;
 let calibrationNoiseGain = null;
@@ -96,7 +98,7 @@ function calculateDigitPower(digits) {
         totalLength += channelData.length;
     });
 
-    return totalPower; // Sum of power across all digit samples
+    return totalPower / totalLength; // Average power per sample
 }
 
 // Play a triplet with noise and SNR based on digit signals only
@@ -144,13 +146,14 @@ function playTriplet(digits) {
     noiseSource.loop = true; // Loop if noise is shorter
 
     // Calculate SNR-based gain for digits
-    const digitPower = calculateDigitPower(digits);
+    const digitPower = calculateDigitPower(digits); // Average power per sample
     const noiseSamplePower = noiseBuffer.getChannelData(0).reduce((sum, val) => sum + val * val, 0) / noiseBuffer.length; // Noise power per sample
-    const noisePower = noiseSamplePower * digitTotalLength; // Noise power over digit duration
-    console.log('Digit Power:', digitPower, 'Noise Power:', noisePower, 'Digit Total Length:', digitTotalLength);
+    console.log('Digit Power (per sample):', digitPower, 'Noise Power (per sample):', noiseSamplePower);
 
     const snrLinear = Math.pow(10, currentSNR / 10); // Convert SNR to linear scale
-    const digitGainValue = Math.sqrt(snrLinear * noisePower / digitPower); // Adjust digit gain to achieve SNR
+    const digitGainValue = Math.sqrt(snrLinear * noiseSamplePower / digitPower) * fixedNoiseGain; // Adjust digit gain to achieve SNR
+    console.log('Target SNR (dB):', currentSNR, 'Calculated Gain:', digitGainValue);
+
     if (digitGainValue <= 0) digitGainValue = 0.1; // Minimum gain to ensure audible
 
     // Play full sequence with noise
@@ -169,7 +172,24 @@ function playTriplet(digits) {
     const startTime = audioContext.currentTime;
     source.start(startTime);
     noiseSource.start(startTime, 0, fullBuffer.duration);
-    source.onended = () => noiseSource.stop();
+    const endTime = startTime + (totalDuration / audioContext.sampleRate); // Noise ends with source
+
+    // Disable input during playback
+    document.querySelectorAll('.keypad-button').forEach(button => {
+        button.disabled = true;
+    });
+
+    source.onended = () => {
+        noiseSource.stop();
+        // Enable input after playback
+        document.querySelectorAll('.keypad-button').forEach(button => {
+            button.disabled = false;
+        });
+        document.getElementById('progress').textContent = `Trial ${trialCount + 1} of 24`;
+    };
+
+    // Store end time for response time calculation
+    window.currentTrialEndTime = endTime;
 }
 
 // Start calibration mode
@@ -236,6 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('start').disabled = true;
             trialCount = 0; // Reset trial count
             snrHistory = []; // Reset SNR history
+            responseTimes = []; // Reset response times
+            correctResponseTimes = []; // Reset correct response times
         });
 
         document.querySelectorAll('.keypad-button:not(#clear):not(#submit)').forEach(button => {
@@ -257,13 +279,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const inputDigits = userInput.split('').map(Number);
                 const correct = inputDigits.every((d, i) => d === currentDigits[i]);
                 snrHistory.push(currentSNR); // Record current SNR
+                const responseTime = (performance.now() / 1000) - (window.currentTrialEndTime || 0);
+                if (responseTime >= 0) {
+                    responseTimes.push(responseTime); // Record all response times
+                    if (correct) correctResponseTimes.push(responseTime); // Record correct response times
+                }
                 if (correct) {
                     currentSNR -= stepSize; // Decrease SNR by 2 dB on correct
                 } else {
                     currentSNR += stepSize; // Increase SNR by 2 dB on incorrect
                 }
                 trialCount++;
-                document.getElementById('result').textContent = correct ? 'Correct!' : 'Incorrect.';
+                document.getElementById('result').textContent = ''; // Remove correct/incorrect feedback
+                document.getElementById('progress').textContent = `Trial ${trialCount} of 24`; // Update progress
                 if (trialCount >= numTrials) {
                     calculateSRT(); // Calculate SRT after 24 trials
                 } else {
@@ -280,12 +308,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Calculate and display SRT
+// Calculate and display SRT, then redirect to results page
 function calculateSRT() {
     if (snrHistory.length >= 20) {
         const last20 = snrHistory.slice(-20);
         const srt = last20.reduce((sum, val) => sum + val, 0) / 20;
-        document.getElementById('result').textContent = `Test complete. SRT: ${srt.toFixed(2)} dB`;
+        const meanResponseTime = responseTimes.reduce((sum, val) => sum + val, 0) / responseTimes.length || 0;
+        const meanCorrectResponseTime = correctResponseTimes.reduce((sum, val) => sum + val, 0) / correctResponseTimes.length || 0;
+
+        // Store results in localStorage
+        localStorage.setItem('testResults', JSON.stringify({
+            srt: srt.toFixed(2),
+            meanResponseTime: meanResponseTime.toFixed(2),
+            meanCorrectResponseTime: meanCorrectResponseTime.toFixed(2)
+        }));
+
+        // Redirect to results page
+        window.location.href = '/results.html';
     } else {
         document.getElementById('result').textContent = 'Not enough trials for SRT.';
     }
